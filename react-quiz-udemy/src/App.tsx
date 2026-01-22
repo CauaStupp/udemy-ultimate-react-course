@@ -8,6 +8,7 @@ import { Loading } from "./utils/Loading";
 import { ErrorComponent } from "./utils/Error";
 import { Progress } from "./components/Progress";
 import { Footer } from "./components/Footer";
+import { FinishQuiz } from "./components/FinishQuiz";
 
 const API_URL = `https://mabdurahman.github.io/questions-api/data/reactjs-questions.json`;
 
@@ -22,6 +23,8 @@ function App() {
       points: 0,
     },
   );
+
+  const maxPoints = questions?.reduce((prev, acc) => prev + acc.points, 0) || 0;
 
   useEffect(() => {
     async function fetchQuestions() {
@@ -56,9 +59,11 @@ function App() {
         {questions && status === "active" && (
           <>
             <Progress
-              max={questions.length}
-              value={index + 1}
+              maxValue={questions.length}
+              value={index}
               points={points}
+              maxPoints={maxPoints}
+              answer={answer}
             />
             <Questions
               key={index}
@@ -66,10 +71,17 @@ function App() {
               answer={answer}
               dispatch={dispatch}
             />
-            <Footer dispatch={dispatch} answer={answer} />
+            <Footer
+              dispatch={dispatch}
+              answer={answer}
+              count={questions.length}
+              index={index}
+            />
           </>
         )}
-        {status === "finished" && <p>Finished</p>}
+        {status === "finished" && (
+          <FinishQuiz maxPoints={maxPoints} points={points} />
+        )}
       </main>
     </>
   );

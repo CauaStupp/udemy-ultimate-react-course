@@ -49,7 +49,6 @@ export function questionReducer(
         ...state,
         questions: action.payload,
         status: "ready",
-        index: 0,
       };
 
     case "dataFailed":
@@ -85,9 +84,7 @@ export function questionReducer(
     case "finished":
       return {
         ...state,
-        questions: null,
         status: "finished",
-        answer: null,
       };
 
     default:

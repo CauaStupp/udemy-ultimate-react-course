@@ -13,8 +13,13 @@
   color: var(--text-muted);
   transition: all 0.2s ease;
   text-transform: uppercase;
+  user-select: none;
 }
 
 .footer span:hover {
   color: var(--text-default);
+}
+
+.footer button {
+  user-select: none;
 }

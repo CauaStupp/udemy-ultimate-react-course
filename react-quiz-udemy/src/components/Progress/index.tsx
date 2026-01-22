@@ -1,25 +1,41 @@
 import styles from "./styles.module.css";
 
 type ProgressProps = {
-  max: number;
+  maxValue: number;
   value: number;
   points: number;
+  maxPoints: number;
+  answer: number | null;
 };
 
-export function Progress({ max, value, points }: ProgressProps) {
+export function Progress({
+  maxValue,
+  value,
+  points,
+  maxPoints,
+  answer,
+}: ProgressProps) {
   return (
     <div className={styles.containerProgress}>
       <progress
-        max={max}
-        value={value ? value : 0}
+        max={maxValue}
+        value={value + Number(answer !== null)}
         className={styles.progress}
       />
 
       <div className={styles.counts}>
-        <span>
-          Questions {value} / {max}
-        </span>
-        <span>{points} / 280 Points</span>
+        <p>
+          Questions:{" "}
+          <span className="emphasis">
+            {value + 1} / {maxValue}
+          </span>
+        </p>
+        <p>
+          Points:{" "}
+          <span className="emphasis">
+            {points} / {maxPoints}
+          </span>
+        </p>
       </div>
     </div>
   );

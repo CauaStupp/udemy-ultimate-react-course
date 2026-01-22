@@ -52,6 +52,13 @@ button.default:hover {
   color: tomato;
 }
 
+.emphasis {
+  color: var(--text-default);
+  background-color: #333;
+  border-radius: var(--rounded-full);
+  padding: 0.2rem 0.4rem;
+}
+
 .loader {
   width: 48px;
   height: 48px;
