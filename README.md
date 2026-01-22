@@ -8,6 +8,24 @@ Cada pasta abaixo é um projeto ou exercício do curso. Clique para abrir a past
 
 Como usar (exemplo):
 
+# Projetos — Ultimate React Course (Udemy)
+
+Repositório que organiza os projetos desenvolvidos durante o curso **Ultimate React Course** (Udemy).
+
+## Projetos
+
+### [react-quiz-udemy](react-quiz-udemy/)
+
+Aplicação de quiz em React + TypeScript (Vite). O projeto apresenta um conjunto de perguntas em `src/questions.json`, navegação entre questões, seleção de respostas e contagem de acertos.
+
+- Descrição: Quiz simples para praticar React, estados e reducers.
+- Tecnologias: React, TypeScript, Vite, ESLint.
+- Entrar no projeto: [Abrir pasta do projeto](react-quiz-udemy/)
+
+> Observação: clique em "Abrir pasta do projeto" para ver o README específico do projeto, instruções de execução e código fonte.
+
+## Como usar (exemplo)
+
 ```bash
 # clonar o repositório
 git clone <seu-repo-url>
@@ -19,5 +37,3 @@ cd react-quiz-udemy
 pnpm install
 pnpm dev
 ```
-
-Se um projeto não tiver `README.md`, posso gerar automaticamente um com descrição, comandos e notas. Quer que eu gere READMEs individuais para todas as pastas de projeto?
