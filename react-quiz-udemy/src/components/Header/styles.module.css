@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  margin: 3rem auto;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 2rem;
+}
+
+.img {
+  width: 100px;
+}
+
+.title {
+  font-size: 3rem;
+}

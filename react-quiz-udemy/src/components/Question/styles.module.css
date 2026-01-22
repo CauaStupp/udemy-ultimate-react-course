@@ -1,0 +1,41 @@
+.question {
+  width: 100%;
+}
+
+.option {
+  border-radius: 999px;
+  background-color: var(--border);
+  padding: 1rem 2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+  width: 100%;
+  text-align: start;
+  color: var(--text-default);
+}
+
+.option:not(:last-child) {
+  margin-bottom: 0.6rem;
+}
+
+.option:not(.correctOption):not(.incorrectOption):hover {
+  transform: translateX(10px);
+  background-color: transparent;
+  border-color: var(--border);
+}
+
+.answer {
+  transform: translateX(10px);
+}
+
+.correctOption {
+  background-color: var(--blue-bg);
+  border-color: var(--blue-bg);
+  cursor: not-allowed;
+}
+
+.incorrectOption {
+  background-color: var(--orange-bg);
+  color: #000;
+  cursor: not-allowed;
+}

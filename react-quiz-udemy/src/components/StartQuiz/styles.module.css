@@ -1,0 +1,23 @@
+.container {
+  width: 100%;
+  text-align: center;
+}
+
+.container h2 {
+  font-size: 2rem;
+}
+
+.container p {
+  font-size: 1rem;
+  margin-top: 0.4rem;
+  color: var(--text-muted);
+}
+
+.container button {
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+.container button:hover {
+  background-color: var(--border);
+}

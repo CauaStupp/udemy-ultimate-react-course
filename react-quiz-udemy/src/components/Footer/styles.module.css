@@ -1,0 +1,20 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+.footer span {
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--rounded-full);
+  background-color: transparent;
+  border: 2px solid var(--border);
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+}
+
+.footer span:hover {
+  color: var(--text-default);
+}

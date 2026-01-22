@@ -1,0 +1,33 @@
+.containerProgress {
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+.counts {
+  display: flex;
+  justify-content: space-between;
+}
+
+.counts span {
+  color: var(--text-muted);
+}
+
+.progress {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  margin-bottom: 8px;
+}
+
+.progress::-webkit-progress-bar {
+  background-color: var(--text-default); /* Cor de fundo do trilho */
+  border-radius: 999px;
+}
+
+.progress::-webkit-progress-value {
+  background-color: var(--blue-default); /* Cor da barra de progresso */
+  border-radius: 999px;
+}
