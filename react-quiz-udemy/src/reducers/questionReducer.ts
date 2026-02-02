@@ -29,7 +29,23 @@ type Finished = {
   type: "finished";
 };
 
-export type ActionProps = Ready | Failed | Started | Answer | Next | Finished;
+type Reset = {
+  type: "reset";
+};
+
+type Timer = {
+  type: "timer";
+};
+
+export type ActionProps =
+  | Ready
+  | Failed
+  | Started
+  | Answer
+  | Next
+  | Finished
+  | Reset
+  | Timer;
 
 type QuestionState = {
   questions: QuestionType[] | null;
@@ -37,6 +53,7 @@ type QuestionState = {
   index: number;
   answer: number | null;
   points: number;
+  seconds: number | null;
 };
 
 export function questionReducer(
@@ -61,6 +78,7 @@ export function questionReducer(
       return {
         ...state,
         status: "active",
+        seconds: state.questions ? state.questions.length * 30 : state.seconds,
       };
 
     case "newAnswer":
@@ -87,6 +105,21 @@ export function questionReducer(
         status: "finished",
       };
 
+    case "reset":
+      return {
+        ...state,
+        status: "ready",
+        index: 0,
+        answer: null,
+        points: 0,
+      };
+
+    case "timer":
+      return {
+        ...state,
+        seconds: state.seconds ? state.seconds - 1 : state.seconds,
+        status: state.seconds && state.seconds <= 0 ? "finished" : state.status,
+      };
     default:
       throw new Error("Action don't exists");
   }
