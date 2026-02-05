@@ -17,6 +17,10 @@
   gap: 2.5rem;
 }
 
+.content > a {
+  padding: 1rem 1.3rem;
+}
+
 .title {
   font-size: 4.5rem;
   line-height: 1.3;

@@ -1,0 +1,40 @@
+.container {
+  background-color: var(--color-dark--1);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+.section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 48rem;
+  margin: 6rem auto;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-columns: 2fr;
+  gap: 2rem;
+  background-color: var(--color-dark--2);
+  border-radius: 4px;
+  padding: 3rem;
+  width: 100%;
+}
+
+.form > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.form > a {
+  width: max-content;
+  padding: 0.6rem 1.3rem;
+  justify-self: flex-end;
+  margin-top: 1rem;
+}
