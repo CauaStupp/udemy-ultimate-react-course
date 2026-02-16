@@ -50,5 +50,5 @@
   width: inherit;
   height: inherit;
   background-color: var(--color-dark--2);
-  box-shadow: 4px 4px 7px #00000029;
+  box-shadow: var(--shadow-md);
 }

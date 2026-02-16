@@ -1,0 +1,46 @@
+.form {
+  background-color: var(--color-dark--2);
+  border-radius: 7px;
+  padding: 2rem 3rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.box label {
+  font-size: 1.6rem;
+}
+
+.textArea {
+  resize: none;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.buttons button {
+  padding: 0.8rem 1.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background-color: var(--color-brand--2);
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.5rem;
+  color: var(--color-dark--1);
+}
+
+.buttons button:last-child {
+  background-color: transparent;
+  border: 1px solid var(--color-light--3);
+  color: var(--color-light--3);
+}

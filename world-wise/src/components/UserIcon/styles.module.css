@@ -1,0 +1,43 @@
+.container {
+  width: max-content;
+  height: 100%;
+  position: fixed;
+  right: 2rem;
+  top: 2rem;
+  z-index: 999;
+}
+
+.content {
+  background-color: var(--color-dark--1);
+  padding: 1rem 1.4rem;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  box-shadow: var(--shadow-md);
+}
+
+.userImg {
+  width: 45px;
+  height: 45px;
+  border-radius: 999px;
+  object-fit: cover;
+}
+
+.name {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.logout {
+  background-color: var(--color-dark--2);
+  border-radius: 7px;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  color: inherit;
+  font-family: inherit;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+}

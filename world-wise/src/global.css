@@ -11,6 +11,8 @@
   --color-light--1: #aaa;
   --color-light--2: #ececec;
   --color-light--3: #d6dee0;
+  --shadow-md: 4px 4px 7px #00000029;
+  --shadow-sm: 0px 0px 8px #00000029;
 }
 
 * {
@@ -31,6 +33,12 @@ body {
   line-height: 1.6;
 }
 
+button {
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
 ul,
 li {
   list-style: none;
@@ -49,7 +57,8 @@ label {
 }
 
 input,
-textarea {
+textarea,
+select {
   width: 100%;
   padding: 0.8rem 1.2rem;
   font-family: inherit;
@@ -60,7 +69,9 @@ textarea {
   transition: all 0.2s;
 }
 
-input:focus {
+input:focus,
+textarea:focus,
+select:focus {
   outline: none;
   background-color: #fff;
 }
@@ -81,4 +92,19 @@ input:focus {
 .cta:link:hover {
   opacity: 0.7;
   transform: translateY(-5px);
+}
+
+.fadeIn {
+  animation: fadeIn 0.4s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: initial;
+    opacity: 1;
+  }
 }

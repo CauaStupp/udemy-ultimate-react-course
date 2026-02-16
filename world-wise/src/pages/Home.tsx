@@ -1,12 +1,12 @@
 import { Header } from "@/components/Header";
-import styles from "./home.module.css";
+import styles from "./Home.module.css";
 import { Link } from "react-router-dom";
 
 export function Home() {
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
       <Header />
-      <div className={styles.content}>
+      <div className={`fadeIn ${styles.content}`}>
         <h1 className={styles.title}>
           You travel the world. <br />
           WorldWise keeps track of your adventures.
@@ -16,10 +16,10 @@ export function Home() {
           of. Never forget your wonderful experiences, and show your friends how
           you have wandered the world.
         </p>
-        <Link to="/app" className="cta">
+        <Link to="/login" className="cta">
           start tracking now
         </Link>
       </div>
-    </div>
+    </main>
   );
 }

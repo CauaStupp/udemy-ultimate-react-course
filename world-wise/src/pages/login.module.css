@@ -38,3 +38,7 @@
   justify-self: flex-end;
   margin-top: 1rem;
 }
+
+.select {
+  content: "";
+}

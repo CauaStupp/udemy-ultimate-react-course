@@ -1,0 +1,25 @@
+.container {
+  width: 100%;
+  position: relative;
+  background-color: var(--color-dark--2);
+}
+
+.buttonContainer {
+  position: absolute;
+  bottom: 5rem;
+  width: max-content;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  z-index: 1000;
+}
+
+.button {
+  font-weight: 700;
+  font-size: 1.4rem;
+  background-color: var(--color-brand--2);
+  color: var(--color-dark--1);
+  box-shadow: var(--shadow-md);
+  padding: 0.8rem 1.6rem;
+  text-transform: uppercase;
+}

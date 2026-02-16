@@ -1,13 +1,11 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styles from "./styles.module.css";
-import Logo from "../../assets/logo.png";
+import { Logo } from "../Logo";
 
 export function Header() {
   return (
     <header className={styles.header}>
-      <Link to="/">
-        <img src={Logo} alt="Logo of World Wise" className={styles.logo} />
-      </Link>
+      <Logo />
 
       <nav className={styles.nav}>
         <ul>
@@ -22,7 +20,7 @@ export function Header() {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/login" className={styles.link}>
+            <NavLink to="/login" className={`${styles.link} cta`}>
               Login
             </NavLink>
           </li>

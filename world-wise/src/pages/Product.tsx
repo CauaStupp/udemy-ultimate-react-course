@@ -1,13 +1,13 @@
 import { Header } from "@/components/Header";
 import Image from "@/assets/img-1.jpg";
-import styles from "./product.module.css";
+import styles from "./Product.module.css";
 
 export function Product() {
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
       <Header />
 
-      <section className={styles.section}>
+      <section className={`fadeIn ${styles.section}`}>
         <div className={styles.image}>
           <img src={Image} alt="Image" className={styles.image} />
         </div>
@@ -25,6 +25,6 @@ export function Product() {
           </p>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

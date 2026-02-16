@@ -1,13 +1,13 @@
 import { Header } from "@/components/Header";
 import Image from "@/assets/img-2.jpg";
-import styles from "./pricing.module.css";
+import styles from "./Pricing.module.css";
 
 export function Pricing() {
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
       <Header />
 
-      <section className={styles.section}>
+      <section className={`fadeIn ${styles.section}`}>
         <div className={styles.content}>
           <h1>
             Simple pricing. <br /> Just $9/month.
@@ -23,6 +23,6 @@ export function Pricing() {
           <img src={Image} alt="Image" className={styles.image} />
         </div>
       </section>
-    </div>
+    </main>
   );
 }

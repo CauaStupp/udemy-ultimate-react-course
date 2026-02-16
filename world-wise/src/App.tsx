@@ -1,5 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
 import { Router } from "./router";
+import { Providers } from "./utils/Providers";
 
 function App() {
   return (
@@ -9,9 +10,9 @@ function App() {
         v7_startTransition: true,
       }}
     >
-      <main className="container">
+      <Providers>
         <Router />
-      </main>
+      </Providers>
     </BrowserRouter>
   );
 }
