@@ -9,9 +9,10 @@
 .section {
   display: flex;
   justify-content: center;
-  align-items: center;
-  max-width: 48rem;
+
   margin: 6rem auto;
+  position: relative;
+  gap: 1.5rem;
 }
 
 .form {
@@ -23,6 +24,7 @@
   border-radius: 4px;
   padding: 3rem;
   width: 100%;
+  max-width: 48rem;
 }
 
 .form > div {
@@ -40,5 +42,62 @@
 }
 
 .select {
-  content: "";
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  padding: 0.8rem 1.2rem;
+  border-radius: 5px;
+  position: relative;
+  background-image:
+    linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position:
+    calc(100% - 1rem) center,
+    calc(100% - 1rem) center;
+  background-size:
+    8px 8px,
+    8px 8px;
+  background-repeat: no-repeat;
+}
+
+.select::-ms-expand {
+  display: none;
+}
+
+.select > option {
+  background-color: var(--color-dark--2);
+  color: var(--color-light--1);
+  padding: 0.5rem 1rem;
+}
+
+.select option:hover,
+.select option:focus {
+  background-color: var(--color-dark--2);
+  color: #fff;
+}
+
+.select option[selected],
+.select option:checked {
+  background-color: var(--color-brand--1);
+  color: var(--color-dark--2);
+}
+
+.select optgroup {
+  color: var(--color-light--2);
+}
+
+.preview {
+  background-color: var(--color-dark--2);
+  border-radius: 5px;
+  gap: 2rem;
+  background-color: var(--color-dark--2);
+  border-radius: 5px;
+  padding: 2rem;
+  height: 100%;
+}
+
+.preview h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
 }

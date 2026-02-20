@@ -13,7 +13,9 @@ export function CountriesList({ countries }: CountriesProps) {
       {countries.map((city) => (
         <li className={styles.item} key={city.country}>
           <h3 className={styles.sigle}>{city.emoji}</h3>
-          <span className={styles.cityName}>{city.country}</span>
+          <span className={`truncate ${styles.cityName}`} title={city.country}>
+            {city.country}
+          </span>
         </li>
       ))}
     </ul>

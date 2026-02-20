@@ -1,67 +1,66 @@
 import { useParams } from "react-router-dom";
 import styles from "./City.module.css";
-import type { ListType } from "@/hooks/useMapCities";
+import { Loading } from "@/components/Loading";
+import { useCitiesContext } from "@/contexts/citiesContext";
+import { useEffect } from "react";
+import { BackButton } from "@/components/BackButton";
 
-const formatDate = (date: string | null) => {
+const formatDate = (date: string | null): string | null => {
   if (!date) return null;
-  new Intl.DateTimeFormat("en", {
+  const d = new Date(date);
+  if (isNaN(d.getTime())) return null;
+  return new Intl.DateTimeFormat("en", {
     day: "numeric",
     month: "long",
     year: "numeric",
     weekday: "long",
-  }).format(new Date(date));
+  }).format(d);
 };
 
-type CityProps = {
-  cities: ListType[] | null;
-};
-
-export function City({ cities }: CityProps) {
+export function City() {
   const { id } = useParams();
-  const filter = (cities && cities.filter((city) => city.id === id)) || null;
-  console.log(filter);
-  const currentCity = {
-    cityName: "Lisbon",
-    emoji: "🇵🇹",
-    date: "2027-10-31T15:59:59.138Z",
-    notes: "My favorite city so far!",
-  };
+  const { currentCity, getCity, loading } = useCitiesContext();
 
-  const { cityName, emoji, date, notes } = currentCity;
+  useEffect(() => {
+    id && getCity(id);
+  }, [id]);
 
-  return (
-    <div className={styles.container}>
-      <div className={styles.row}>
-        <h6>City name</h6>
-        <h3>
-          <span>{emoji}</span> {cityName}
-        </h3>
-      </div>
-
-      <div className={styles.row}>
-        <h6>You went to {cityName} on</h6>
-        <p>{formatDate(date || null)}</p>
-      </div>
-
-      {notes && (
+  if (loading) return <Loading />;
+  if (currentCity)
+    return (
+      <div className={`fadeIn ${styles.container}`}>
         <div className={styles.row}>
-          <h6>Your notes</h6>
-          <p>{notes}</p>
+          <h6>City name</h6>
+          <h3>
+            <span className={styles.emoji}>{currentCity.emoji}</span>{" "}
+            {currentCity.cityName}
+          </h3>
         </div>
-      )}
 
-      <div className={styles.row}>
-        <h6>Learn more</h6>
-        <a
-          href={`https://en.wikipedia.org/wiki/${cityName}`}
-          target="_blank"
-          rel="noreferrer"
-        >
-          Check out {cityName} on Wikipedia &rarr;
-        </a>
+        <div className={styles.row}>
+          <h6>You went to {currentCity.cityName} on</h6>
+          <p>{formatDate(currentCity.date || null)}</p>
+        </div>
+
+        {currentCity.notes && (
+          <div className={styles.row}>
+            <h6>Your notes</h6>
+            <p>{currentCity.notes}</p>
+          </div>
+        )}
+
+        <div className={styles.row}>
+          <h6>Learn more</h6>
+          <a
+            href={`https://en.wikipedia.org/wiki/${currentCity.cityName}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Check out {currentCity.cityName} on Wikipedia &rarr;
+          </a>
+        </div>
+
+        <BackButton />
       </div>
-
-      <button className={styles.backButton}>Back</button>
-    </div>
-  );
+    );
 }

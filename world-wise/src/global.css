@@ -1,4 +1,4 @@
-@import "https://unpkg.com/leaflet@1.7.1/dist/leaflet.css";
+@import "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
 @import "https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap";
 
 :root {
@@ -92,6 +92,20 @@ select:focus {
 .cta:link:hover {
   opacity: 0.7;
   transform: translateY(-5px);
+}
+
+.truncate {
+  white-space: nowrap; /* Prevents text from wrapping */
+  overflow: hidden; /* Hides overflowing content */
+  text-overflow: ellipsis; /* Displays "..." at the end */
+  width: 50%; /* Or max-width, or a percentage value */
+}
+
+.truncateFull {
+  white-space: nowrap; /* Prevents text from wrapping */
+  overflow: hidden; /* Hides overflowing content */
+  text-overflow: ellipsis; /* Displays "..." at the end */
+  width: 100%; /* Or max-width, or a percentage value */
 }
 
 .fadeIn {

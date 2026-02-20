@@ -9,7 +9,7 @@ interface ButtonProps extends Omit<
   "type"
 > {
   children: ReactNode;
-  type: "primary" | "secondary";
+  type: "primary" | "secondary" | "position";
 }
 
 export function Button({ children, type, ...rest }: ButtonProps) {

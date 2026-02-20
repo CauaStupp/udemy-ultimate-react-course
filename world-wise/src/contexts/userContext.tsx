@@ -1,5 +1,6 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, type ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLocalStorage } from "usehooks-ts";
 
 export type UserType = {
   id: string;
@@ -10,28 +11,27 @@ export type UserType = {
 type UserContextType = {
   user: UserType | null;
   setUser: React.Dispatch<React.SetStateAction<UserType | null>>;
-  handleLogin(user: Omit<UserType, "id">): void;
+  handleLogin(user: UserType): void;
   handleLogout(): void;
 };
 
 const UserContext = createContext<UserContextType | null>(null);
 
 export function UserContextProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<UserType | null>(null);
+  const [user, setUser] = useLocalStorage<UserType | null>("@user", null);
   const navigate = useNavigate();
 
-  function handleLogin(user: Omit<UserType, "id">) {
+  function handleLogin(user: UserType) {
     if (!user || !user.name || !user.image)
       return alert("Please, confirm your name and image!");
-    setUser({
-      id: crypto.randomUUID(),
-      ...user,
-    });
+    setUser(user);
     navigate("/app");
   }
 
   function handleLogout() {
     setUser(null);
+
+    navigate("/");
   }
 
   return (

@@ -1,19 +1,24 @@
 import { Header } from "@/components/Header";
 import styles from "./Login.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image01 from "@/assets/image01.jpg";
 import Image02 from "@/assets/image02.jpg";
 import Image03 from "@/assets/image03.jpg";
 import { useUserContext } from "@/contexts/userContext";
 import { Button } from "@/components/Button";
+import { UserIcon } from "@/components/UserIcon";
+import { useNavigate } from "react-router-dom";
 
 export function Login() {
-  const [user, setUser] = useState({
-    name: "",
-    image: "",
-  });
+  const [name, setName] = useState("");
+  const [image, setImage] = useState("");
+  const navigate = useNavigate();
 
-  const { handleLogin } = useUserContext();
+  const { user, handleLogin } = useUserContext();
+
+  useEffect(() => {
+    user ? navigate("/app") : null;
+  }, []);
 
   return (
     <main className={styles.container}>
@@ -27,20 +32,16 @@ export function Login() {
               type="name"
               id="name"
               placeholder="Your name or nickname..."
-              value={user.name}
-              onChange={({ target }) =>
-                setUser({ ...user, name: target.value })
-              }
+              value={name}
+              onChange={({ target }) => setName(target.value)}
             />
           </div>
           <div>
             <label htmlFor="image">Select your image</label>
             <select
               id="image"
-              value={user.image}
-              onChange={({ target }) =>
-                setUser({ ...user, image: target.value })
-              }
+              value={image}
+              onChange={({ target }) => setImage(target.value)}
               className={styles.select}
             >
               <option value="" disabled>
@@ -55,12 +56,19 @@ export function Login() {
             type="primary"
             onClick={(e) => {
               e.preventDefault();
-              handleLogin(user);
+              handleLogin({ id: crypto.randomUUID(), name, image });
             }}
           >
             Login
           </Button>
         </form>
+
+        {name && image && (
+          <div className={`fadeIn ${styles.preview}`}>
+            <h2>Preview</h2>
+            <UserIcon namePreview={name} imagePreview={image} isPreview />
+          </div>
+        )}
       </section>
     </main>
   );

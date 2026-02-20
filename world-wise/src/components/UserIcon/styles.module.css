@@ -1,10 +1,14 @@
 .container {
   width: max-content;
-  height: 100%;
+  height: max-content;
   position: fixed;
   right: 2rem;
   top: 2rem;
   z-index: 999;
+}
+
+.preview {
+  width: max-content;
 }
 
 .content {

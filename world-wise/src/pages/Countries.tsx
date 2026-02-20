@@ -1,14 +1,10 @@
-import type { ListType } from "@/hooks/useMapCities";
 import styles from "./Countries.module.css";
 import { Loading } from "@/components/Loading";
 import { CountriesList } from "@/components/CountriesList";
+import { useCitiesContext } from "@/contexts/citiesContext";
 
-type CountriesProps = {
-  cities: ListType[] | null;
-  loading: boolean;
-};
-
-export function Countries({ cities, loading }: CountriesProps) {
+export function Countries() {
+  const { cities, loading } = useCitiesContext();
   const countries =
     cities &&
     cities.reduce((arr: { country: string; emoji: string }[], city) => {
