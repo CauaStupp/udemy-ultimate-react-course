@@ -42,6 +42,7 @@
 .time {
   margin-left: auto;
   font-size: 1.5rem;
+  white-space: nowrap;
 }
 
 .deleteButton {

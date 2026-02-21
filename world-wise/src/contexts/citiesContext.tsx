@@ -1,8 +1,9 @@
+import { citiesReducer } from "@/reducers/citiesReducer";
 import {
   createContext,
   useContext,
   useEffect,
-  useState,
+  useReducer,
   type ReactNode,
 } from "react";
 import { useNavigate } from "react-router-dom";
@@ -22,37 +23,43 @@ export type ListType = {
 
 type CitiesContextType = {
   cities: ListType[] | null;
-  loading: boolean;
+  isLoading: boolean;
   error: string | null;
   currentCity: ListType | null;
   getCity(id: string): void;
   createNewCity(city: Omit<ListType, "id">): void;
+  deleteCity(id: string): void;
+  deleteAllCities(): void;
 };
 
 const CitiesContext = createContext<CitiesContextType | null>(null);
 const BASE_URL = "http://localhost:9000";
 
 export function CitiesContextProvider({ children }: { children: ReactNode }) {
-  const [cities, setCities] = useState<ListType[] | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [currentCity, setCurrentCity] = useState<ListType | null>(null);
+  const [{ cities, isLoading, error, currentCity }, dispatch] = useReducer(
+    citiesReducer,
+    {
+      cities: null,
+      isLoading: false,
+      currentCity: null,
+      error: null,
+    },
+  );
   const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
       try {
-        setLoading(true);
+        dispatch({ type: "cities/loading" });
         const response = await fetch(`${BASE_URL}/cities`);
         if (!response.ok) throw new Error("Error to get Cities");
         const json = (await response.json()) as ListType[];
-        setCities(json);
+        dispatch({ type: "cities/loaded", payload: json });
       } catch (error: unknown) {
-        setError(error instanceof Error ? error.message : "Error");
-        setLoading(false);
-        setCities(null);
-      } finally {
-        setLoading(false);
+        dispatch({
+          type: "cities/error",
+          payload: error instanceof Error ? error.message : "Error",
+        });
       }
     }
 
@@ -61,22 +68,22 @@ export function CitiesContextProvider({ children }: { children: ReactNode }) {
 
   async function getCity(id: string) {
     try {
-      setLoading(true);
+      dispatch({ type: "cities/loading" });
       const response = await fetch(`${BASE_URL}/cities/${id}`);
       if (!response.ok) throw new Error("Error to get Cities");
       const json = (await response.json()) as ListType;
-      setCurrentCity(json);
+      dispatch({ type: "city/loaded", payload: json });
     } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "Error");
-      setCities(null);
-    } finally {
-      setLoading(false);
+      dispatch({
+        type: "cities/error",
+        payload: error instanceof Error ? error.message : "Error",
+      });
     }
   }
 
   async function createNewCity(city: Omit<ListType, "id">) {
     try {
-      setLoading(true);
+      dispatch({ type: "cities/loading" });
       const response = await fetch(`${BASE_URL}/cities`, {
         method: "POST",
         body: JSON.stringify(city),
@@ -86,19 +93,72 @@ export function CitiesContextProvider({ children }: { children: ReactNode }) {
       });
       if (!response.ok) throw new Error("Error to Create new City");
       const data = (await response.json()) as ListType;
-      await setCities((cities) => (cities ? [...cities, data] : [data]));
+      dispatch({ type: "city/create", payload: data });
       navigate("/app/cities");
     } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "Error");
-      setCities(null);
-    } finally {
-      setLoading(false);
+      dispatch({
+        type: "cities/error",
+        payload: error instanceof Error ? error.message : "Error",
+      });
+    }
+  }
+
+  async function deleteCity(id: string) {
+    try {
+      dispatch({ type: "cities/loading" });
+      const response = await fetch(`${BASE_URL}/cities/${id}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) throw new Error("Error to Delete City");
+
+      dispatch({ type: "city/delete", payload: id });
+    } catch (error: unknown) {
+      dispatch({
+        type: "cities/error",
+        payload: error instanceof Error ? error.message : "Error",
+      });
+    }
+  }
+
+  async function deleteAllCities() {
+    try {
+      dispatch({ type: "cities/loading" });
+
+      if (!cities || cities.length === 0) {
+        dispatch({ type: "cities/delete" });
+        return;
+      }
+
+      await Promise.all(
+        cities.map(async (c) => {
+          const res = await fetch(`${BASE_URL}/cities/${c.id}`, {
+            method: "DELETE",
+          });
+          if (!res.ok) throw new Error("Error to Delete all cities");
+        }),
+      );
+
+      dispatch({ type: "cities/delete" });
+    } catch (error: unknown) {
+      dispatch({
+        type: "cities/error",
+        payload: error instanceof Error ? error.message : "Error",
+      });
     }
   }
 
   return (
     <CitiesContext.Provider
-      value={{ cities, error, loading, currentCity, getCity, createNewCity }}
+      value={{
+        cities,
+        error,
+        isLoading,
+        currentCity,
+        getCity,
+        createNewCity,
+        deleteCity,
+        deleteAllCities,
+      }}
     >
       {children}
     </CitiesContext.Provider>

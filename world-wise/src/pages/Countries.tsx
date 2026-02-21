@@ -4,7 +4,7 @@ import { CountriesList } from "@/components/CountriesList";
 import { useCitiesContext } from "@/contexts/citiesContext";
 
 export function Countries() {
-  const { cities, loading } = useCitiesContext();
+  const { cities, isLoading } = useCitiesContext();
   const countries =
     cities &&
     cities.reduce((arr: { country: string; emoji: string }[], city) => {
@@ -17,8 +17,8 @@ export function Countries() {
 
   return (
     <div className="fadeIn">
-      {loading && !countries && <Loading />}
-      {countries && !loading ? (
+      {isLoading && !countries && <Loading />}
+      {countries && !isLoading ? (
         <CountriesList countries={countries} />
       ) : (
         <h2 className={styles.message}>

@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
 import type { ListType } from "@/contexts/citiesContext";
+import { Button } from "../Button";
 
 type CitiesListProps = {
   cities: ListType[];
   currentCity: ListType | null;
+  deleteCity(id: string): void;
+  deleteAllCities(): void;
 };
 
 function formatDate(date: Date) {
@@ -15,9 +18,19 @@ function formatDate(date: Date) {
   }).format(new Date(date));
 }
 
-export function CitiesList({ cities, currentCity }: CitiesListProps) {
+export function CitiesList({
+  cities,
+  currentCity,
+  deleteCity,
+  deleteAllCities,
+}: CitiesListProps) {
   return (
     <ul className={styles.list}>
+      {cities.length >= 10 && (
+        <Button type="primary" onClick={deleteAllCities}>
+          Delete all
+        </Button>
+      )}
       {cities.map((city) => (
         <li className={styles.item} key={city.id}>
           <Link
@@ -43,6 +56,10 @@ export function CitiesList({ cities, currentCity }: CitiesListProps) {
             <button
               className={styles.deleteButton}
               aria-label="Delete country button"
+              onClick={(e) => {
+                e.preventDefault();
+                deleteCity(city.id);
+              }}
             >
               &times;
             </button>
