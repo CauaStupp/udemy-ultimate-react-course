@@ -17,7 +17,7 @@ export function Login() {
   const { user, handleLogin } = useUserContext();
 
   useEffect(() => {
-    user ? navigate("/app") : null;
+    user ? navigate("/app", { replace: true }) : null;
   }, []);
 
   return (

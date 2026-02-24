@@ -67,6 +67,8 @@ export function CitiesContextProvider({ children }: { children: ReactNode }) {
   }, []);
 
   async function getCity(id: string) {
+    if (currentCity && id === currentCity.id) return;
+
     try {
       dispatch({ type: "cities/loading" });
       const response = await fetch(`${BASE_URL}/cities/${id}`);

@@ -94,6 +94,7 @@ export function citiesReducer(
         ...state,
         isLoading: false,
         cities: state.cities ? [...state.cities, action.payload] : state.cities,
+        currentCity: action.payload,
       };
     case "city/delete":
       return {
@@ -102,6 +103,7 @@ export function citiesReducer(
         cities: state.cities
           ? state.cities.filter((city) => city.id !== action.payload)
           : state.cities,
+        currentCity: null,
       };
     default:
       throw new Error("Unknown action type");

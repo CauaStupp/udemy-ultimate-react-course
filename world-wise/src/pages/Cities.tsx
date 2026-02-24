@@ -4,11 +4,12 @@ import { Message } from "@/components/Message";
 import { useCitiesContext } from "@/contexts/citiesContext";
 
 export function Cities() {
-  const { cities, isLoading, currentCity, deleteCity, deleteAllCities } =
+  const { cities, isLoading, error, currentCity, deleteCity, deleteAllCities } =
     useCitiesContext();
 
   return (
     <div className="fadeIn">
+      {error && !isLoading && <Message message={error} />}
       {isLoading && !cities && <Loading />}
       {cities ? (
         <CitiesList

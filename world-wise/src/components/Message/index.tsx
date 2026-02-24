@@ -1,9 +1,15 @@
 import styles from "./styles.module.css";
 
-export function Message() {
+type MessageProps = {
+  message?: string;
+};
+
+export function Message({ message }: MessageProps) {
   return (
     <h2 className={styles.message}>
-      👋 Add your first city by clicking on a city on the map
+      {message
+        ? message
+        : "👋 Add your first city by clicking on a city on the map"}
     </h2>
   );
 }

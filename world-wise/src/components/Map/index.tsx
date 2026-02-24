@@ -17,7 +17,7 @@ import { useUrlPosition } from "@/hooks/useUrlPosition";
 
 export function Map() {
   const { cities } = useCitiesContext();
-  const [mapPosition, setMapPosition] = useState<LatLngTuple>([40, -0]);
+  const [mapPosition, setMapPosition] = useState<LatLngTuple>([0, 0]);
   const {
     position,
     isLoading: loadingLocation,

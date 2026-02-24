@@ -30,8 +30,6 @@ export function UserContextProvider({ children }: { children: ReactNode }) {
 
   function handleLogout() {
     setUser(null);
-
-    navigate("/");
   }
 
   return (
