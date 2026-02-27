@@ -1,20 +1,10 @@
-import React from "react";
-import type { ActionProps } from "../../reducers/questionReducer";
+import { useQuestionsContext } from "../../contexts/questionsContext";
 
-type NextButtonProps = {
-  dispatch: React.ActionDispatch<[action: ActionProps]>;
-  answer: number | null;
-  index: number;
-  count: number;
-};
+export function NextButton() {
+  const { questions, answer, index, dispatch } = useQuestionsContext();
+  const totalQuestions = questions ? questions.length : 0;
 
-export function NextButton({
-  answer,
-  index,
-  count,
-  dispatch,
-}: NextButtonProps) {
-  if (answer !== null && index < count - 1) {
+  if (answer !== null && index < totalQuestions - 1) {
     return (
       <button onClick={() => dispatch({ type: "next" })} className="default">
         Next
@@ -22,7 +12,7 @@ export function NextButton({
     );
   }
 
-  if (index === count - 1) {
+  if (index === totalQuestions - 1) {
     return (
       <button
         onClick={() => dispatch({ type: "finished" })}

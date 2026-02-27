@@ -1,13 +1,9 @@
-import type { ActionProps } from "../../reducers/questionReducer";
+import { useQuestionsContext } from "../../contexts/questionsContext";
 import styles from "./styles.module.css";
 
-type FinishQuizProps = {
-  points: number;
-  maxPoints: number;
-  dispatch: React.ActionDispatch<[action: ActionProps]>;
-};
+export function FinishQuiz() {
+  const { points, maxPoints, dispatch } = useQuestionsContext();
 
-export function FinishQuiz({ points, maxPoints, dispatch }: FinishQuizProps) {
   const percentage = (points / maxPoints) * 100;
 
   function emojiVerify() {

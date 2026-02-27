@@ -1,6 +1,6 @@
 import type { QuestionType } from "../@types/QuestionsType";
 
-type Status = "loading" | "error" | "ready" | "active" | "finished";
+export type Status = "loading" | "error" | "ready" | "active" | "finished";
 
 type Ready = {
   type: "getData";
@@ -9,7 +9,6 @@ type Ready = {
 
 type Failed = {
   type: "dataFailed";
-  payload: null;
 };
 
 type Started = {

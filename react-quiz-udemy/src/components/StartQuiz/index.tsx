@@ -1,12 +1,10 @@
-import type { ActionProps } from "../../reducers/questionReducer";
+import { useQuestionsContext } from "../../contexts/questionsContext";
 import styles from "./styles.module.css";
 
-type StartQuizProps = {
-  dispatch: React.ActionDispatch<[action: ActionProps]>;
-  quizCount?: number;
-};
+export function StartQuiz() {
+  const { questions, dispatch } = useQuestionsContext();
+  const quizCount = questions?.length;
 
-export function StartQuiz({ dispatch, quizCount }: StartQuizProps) {
   return (
     <div className={styles.container}>
       <h2>Start The Quiz</h2>

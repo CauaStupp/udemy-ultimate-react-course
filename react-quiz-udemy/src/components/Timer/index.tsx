@@ -1,14 +1,11 @@
 import { useEffect } from "react";
-import type { ActionProps } from "../../reducers/questionReducer";
+import { useQuestionsContext } from "../../contexts/questionsContext";
 
-type TimerProps = {
-  dispatch: React.ActionDispatch<[action: ActionProps]>;
-  timer: number;
-};
-
-export function Timer({ dispatch, timer }: TimerProps) {
-  const minutes = Math.floor(timer / 60);
-  const seconds = timer % 60;
+export function Timer() {
+  const { seconds: timer, dispatch } = useQuestionsContext();
+  const isTimer = timer ? timer : 0;
+  const minutes = Math.floor(isTimer / 60);
+  const seconds = isTimer % 60;
 
   useEffect(() => {
     const interval = setInterval(() => {

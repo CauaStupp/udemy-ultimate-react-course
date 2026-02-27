@@ -1,14 +1,13 @@
 import styles from "./styles.module.css";
 import type { QuestionType } from "../../@types/QuestionsType";
-import type { ActionProps } from "../../reducers/questionReducer";
+import { useQuestionsContext } from "../../contexts/questionsContext";
 
 type OptionsProps = {
   question: QuestionType;
-  answer: number | null;
-  dispatch: React.ActionDispatch<[action: ActionProps]>;
 };
 
-export function Options({ question, answer, dispatch }: OptionsProps) {
+export function Options({ question }: OptionsProps) {
+  const { answer, dispatch } = useQuestionsContext();
   const hasAnswer = answer !== null;
 
   return (

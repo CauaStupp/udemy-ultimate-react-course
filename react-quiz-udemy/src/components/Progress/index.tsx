@@ -1,25 +1,14 @@
+import { useQuestionsContext } from "../../contexts/questionsContext";
 import styles from "./styles.module.css";
 
-type ProgressProps = {
-  maxValue: number;
-  value: number;
-  points: number;
-  maxPoints: number;
-  answer: number | null;
-};
+export function Progress() {
+  const { questions, index, points, answer, maxPoints } = useQuestionsContext();
 
-export function Progress({
-  maxValue,
-  value,
-  points,
-  maxPoints,
-  answer,
-}: ProgressProps) {
   return (
     <div className={styles.containerProgress}>
       <progress
-        max={maxValue}
-        value={value + Number(answer !== null)}
+        max={questions?.length}
+        value={index + Number(answer !== null)}
         className={styles.progress}
       />
 
@@ -27,7 +16,7 @@ export function Progress({
         <p>
           Questions:{" "}
           <span className="emphasis">
-            {value + 1} / {maxValue}
+            {index + 1} / {questions?.length}
           </span>
         </p>
         <p>
