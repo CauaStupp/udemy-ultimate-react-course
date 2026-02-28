@@ -2,7 +2,7 @@ import { Header } from "@/components/Header";
 import Image from "@/assets/img-2.jpg";
 import styles from "./Pricing.module.css";
 
-export function Pricing() {
+export default function Pricing() {
   return (
     <main className={styles.container}>
       <Header />

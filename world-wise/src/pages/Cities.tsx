@@ -3,7 +3,7 @@ import { Loading } from "@/components/Loading";
 import { Message } from "@/components/Message";
 import { useCitiesContext } from "@/contexts/citiesContext";
 
-export function Cities() {
+export default function Cities() {
   const { cities, isLoading, error, currentCity, deleteCity, deleteAllCities } =
     useCitiesContext();
 

@@ -3,7 +3,7 @@ import { Loading } from "@/components/Loading";
 import { CountriesList } from "@/components/CountriesList";
 import { useCitiesContext } from "@/contexts/citiesContext";
 
-export function Countries() {
+export default function Countries() {
   const { cities, isLoading } = useCitiesContext();
   const countries =
     cities &&

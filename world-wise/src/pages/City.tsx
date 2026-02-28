@@ -17,7 +17,7 @@ const formatDate = (date: Date): string | null => {
   }).format(d);
 };
 
-export function City() {
+export default function City() {
   const { id } = useParams();
   const { currentCity, getCity, isLoading } = useCitiesContext();
 

@@ -9,7 +9,7 @@ import { Button } from "@/components/Button";
 import { UserIcon } from "@/components/UserIcon";
 import { useNavigate } from "react-router-dom";
 
-export function Login() {
+export default function Login() {
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const navigate = useNavigate();

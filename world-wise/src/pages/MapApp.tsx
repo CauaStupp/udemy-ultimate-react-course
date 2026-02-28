@@ -3,7 +3,7 @@ import styles from "./MapApp.module.css";
 import { AsideApp } from "@/components/AsideApp";
 import { UserIcon } from "@/components/UserIcon";
 
-export function MapApp() {
+export default function MapApp() {
   return (
     <main className={styles.container}>
       <UserIcon />

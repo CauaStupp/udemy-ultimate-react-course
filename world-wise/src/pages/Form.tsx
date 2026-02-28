@@ -8,7 +8,7 @@ import { Message } from "@/components/Message";
 import DatePicker from "react-datepicker";
 import { useCitiesContext } from "@/contexts/citiesContext";
 
-export function Form() {
+export default function Form() {
   const { lat, lng } = useUrlPosition();
   const { geocoding, setGeocoding, loading, error } = useGeocoding(lat, lng);
   const { createNewCity, isLoading: citiesLoading } = useCitiesContext();

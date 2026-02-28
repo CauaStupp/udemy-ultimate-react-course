@@ -2,7 +2,7 @@ import { Header } from "@/components/Header";
 import Image from "@/assets/img-1.jpg";
 import styles from "./Product.module.css";
 
-export function Product() {
+export default function Product() {
   return (
     <main className={styles.container}>
       <Header />
