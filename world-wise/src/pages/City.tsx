@@ -5,7 +5,7 @@ import { useCitiesContext } from "@/contexts/citiesContext";
 import { useEffect } from "react";
 import { BackButton } from "@/components/BackButton";
 
-const formatDate = (date: string | null): string | null => {
+const formatDate = (date: Date): string | null => {
   if (!date) return null;
   const d = new Date(date);
   if (isNaN(d.getTime())) return null;
@@ -19,13 +19,13 @@ const formatDate = (date: string | null): string | null => {
 
 export function City() {
   const { id } = useParams();
-  const { currentCity, getCity, loading } = useCitiesContext();
+  const { currentCity, getCity, isLoading } = useCitiesContext();
 
   useEffect(() => {
     id && getCity(id);
   }, [id]);
 
-  if (loading) return <Loading />;
+  if (isLoading) return <Loading />;
   if (currentCity)
     return (
       <div className={`fadeIn ${styles.container}`}>
@@ -39,7 +39,7 @@ export function City() {
 
         <div className={styles.row}>
           <h6>You went to {currentCity.cityName} on</h6>
-          <p>{formatDate(currentCity.date || null)}</p>
+          <p>{formatDate(currentCity.date)}</p>
         </div>
 
         {currentCity.notes && (

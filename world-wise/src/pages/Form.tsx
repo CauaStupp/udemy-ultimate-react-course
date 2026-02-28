@@ -11,7 +11,7 @@ import { useCitiesContext } from "@/contexts/citiesContext";
 export function Form() {
   const { lat, lng } = useUrlPosition();
   const { geocoding, setGeocoding, loading, error } = useGeocoding(lat, lng);
-  const { createNewCity, loading: citiesLoading } = useCitiesContext();
+  const { createNewCity, isLoading: citiesLoading } = useCitiesContext();
 
   function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
