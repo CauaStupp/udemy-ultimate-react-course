@@ -1,4 +1,4 @@
-import { memo, useCallback, useReducer, type ChangeEvent } from "react";
+import { memo, useCallback, useEffect, useReducer } from "react";
 import clickSound from "../assets/ClickSound.m4a";
 import { timerReducer } from "../reducers/timerReducer";
 
@@ -11,33 +11,30 @@ type CalculatorProps = {
 };
 
 function Calculator({ workouts, allowSound }: CalculatorProps) {
-  const [{ number, sets, speed, durationBreak }, dispatch] = useReducer(
-    timerReducer,
-    {
+  const [{ number, sets, speed, durationBreak, duration }, dispatch] =
+    useReducer(timerReducer, {
       number: workouts?.at(0)?.numExercises ?? 0,
       sets: 3,
       speed: 90,
       durationBreak: 5,
-    },
-  );
-
-  const duration = (number * sets * speed) / 60 + (sets - 1) * durationBreak;
+      duration: 30,
+    });
   const mins = Math.floor(duration);
   const seconds = (duration - mins) * 60;
 
-  const playSound = useCallback(
-    (e: ChangeEvent) => {
-      e.preventDefault;
-      if (!allowSound) return;
-      const sound = new Audio(clickSound);
-      sound.play();
-    },
-    [allowSound],
-  );
+  const playSound = useCallback(() => {
+    if (!allowSound) return;
+    const sound = new Audio(clickSound);
+    sound.play();
+  }, [allowSound]);
+
+  useEffect(() => {
+    dispatch({ type: "add/duration" });
+  }, [number, sets, speed, durationBreak]);
 
   return (
     <>
-      <form onChange={(e) => playSound(e)}>
+      <form onChange={playSound}>
         <div>
           <label>Type of workout</label>
           <select
@@ -89,7 +86,7 @@ function Calculator({ workouts, allowSound }: CalculatorProps) {
             value={durationBreak}
             onChange={(e) =>
               dispatch({
-                type: "add/duration",
+                type: "add/durationBreak",
                 payload: Number(e.target.value),
               })
             }
@@ -98,13 +95,25 @@ function Calculator({ workouts, allowSound }: CalculatorProps) {
         </div>
       </form>
       <section>
-        <button onClick={() => dispatch({ type: "less/timer" })}>–</button>
+        <button
+          onClick={() => {
+            (dispatch({ type: "less/timer" }), playSound());
+          }}
+        >
+          –
+        </button>
         <p>
           {mins < 10 && "0"}
           {mins}:{seconds < 10 && "0"}
           {seconds}
         </p>
-        <button onClick={() => dispatch({ type: "add/timer" })}>+</button>
+        <button
+          onClick={() => {
+            (dispatch({ type: "add/timer" }), playSound());
+          }}
+        >
+          +
+        </button>
       </section>
     </>
   );

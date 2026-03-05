@@ -13,9 +13,13 @@ type AddSpeed = {
   payload: number;
 };
 
+type AddDurationBreak = {
+  type: "add/durationBreak";
+  payload: number;
+};
+
 type AddDuration = {
   type: "add/duration";
-  payload: number;
 };
 
 type TimerPlus = {
@@ -31,15 +35,17 @@ type StateType = {
   sets: number;
   speed: number;
   durationBreak: number;
+  duration: number;
 };
 
 type ActionType =
   | AddNumber
   | AddSet
   | AddSpeed
-  | AddDuration
+  | AddDurationBreak
   | TimerPlus
-  | TimerLess;
+  | TimerLess
+  | AddDuration;
 
 export function timerReducer(state: StateType, action: ActionType): StateType {
   switch (action.type) {
@@ -58,20 +64,27 @@ export function timerReducer(state: StateType, action: ActionType): StateType {
         ...state,
         speed: action.payload,
       };
-    case "add/duration":
+    case "add/durationBreak":
       return {
         ...state,
         durationBreak: action.payload,
       };
+    case "add/duration":
+      return {
+        ...state,
+        duration:
+          (state.number * state.sets * state.speed) / 60 +
+          (state.sets - 1) * state.durationBreak,
+      };
     case "add/timer":
       return {
         ...state,
-        number: state.number + 1,
+        duration: state.duration >= 0 ? Math.floor(state.duration) + 1 : 0,
       };
     case "less/timer":
       return {
         ...state,
-        number: state.number - 1,
+        duration: state.duration > 1 ? Math.ceil(state.duration) - 1 : 0,
       };
     default:
       throw new Error("Action unknow");
