@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import styled from "styled-components";
 
 const StyledDataItem = styled.div`
@@ -16,11 +17,17 @@ const Label = styled.span`
   & svg {
     width: 2rem;
     height: 2rem;
-    color: var(--color-brand-600);
+    color: ${(props) => props.theme.colors.brand[600]};
   }
 `;
 
-function DataItem({ icon, label, children }) {
+type DataItemProps = {
+  icon: ReactNode;
+  label: string;
+  children: ReactNode;
+};
+
+function DataItem({ icon, label, children }: DataItemProps) {
   return (
     <StyledDataItem>
       <Label>
