@@ -24,9 +24,18 @@ const StyledDashboardLayout = styled.div`
     grid-template-rows: auto;
   }
 
+  @media (max-width: 1222px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   @media (max-width: 812px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
+  }
+
+  @media (max-width: 634px) {
+    display: flex;
+    flex-direction: column;
   }
 `;
 

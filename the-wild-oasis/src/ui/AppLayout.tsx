@@ -8,6 +8,10 @@ const StyledAppLayout = styled.div`
   grid-template-columns: 26rem 1fr;
   grid-template-rows: auto 1fr;
   height: 100vh;
+
+  @media (max-width: 812px) {
+    grid-template-columns: auto;
+  }
 `;
 
 const Main = styled.main`
@@ -19,6 +23,10 @@ const Main = styled.main`
   display: flex;
   flex-direction: column;
   gap: 3.2rem;
+
+  @media (max-width: 812px) {
+    padding: 4rem 2rem 6.4rem 7rem;
+  }
 `;
 
 function AppLayout() {

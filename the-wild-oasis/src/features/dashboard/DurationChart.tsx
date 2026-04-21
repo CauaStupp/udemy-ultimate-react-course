@@ -27,6 +27,10 @@ const ChartBox = styled.div`
   & .recharts-pie-label-text {
     font-weight: 600;
   }
+
+  @media (max-width: 1222px) {
+    grid-column: 1 / span 2;
+  }
 `;
 
 type DurationData = {

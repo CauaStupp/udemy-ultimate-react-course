@@ -7,21 +7,28 @@ import {
   HiOutlineHomeModern,
   HiOutlineUsers,
 } from "react-icons/hi2";
-import { HiOutlineDeviceMobile } from "react-icons/hi";
 
 const StyledNav = styled.nav`
   width: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+
+  @media (max-width: 812px) {
+  }
 `;
 
-const NavList = styled.ul`
+const NavList = styled.ul.attrs<{ $isOpen: boolean }>((props) => ({
+  $isOpen: props.$isOpen || false,
+}))`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
   list-style: none;
+
   @media (max-width: 812px) {
-    display: none;
+    transition: 0.2s all;
+    transform: translateX(${(props) => (props.$isOpen ? "0px" : "43px")});
   }
 `;
 
@@ -70,29 +77,14 @@ const StyledLink = styled(NavLink)`
   }
 `;
 
-const ButtonMobile = styled.button`
-  width: max-content;
-  height: max-content;
-  color: ${(props) => props.theme.colors.grey[900]};
-  display: none;
+type MainNavProps = {
+  isOpen: boolean;
+};
 
-  &:svg > {
-    width: 4rem;
-    height: 4rem;
-  }
-
-  @media (max-width: 812px) {
-    display: block;
-  }
-`;
-
-function MainNav() {
+function MainNav({ isOpen }: MainNavProps) {
   return (
     <StyledNav>
-      <ButtonMobile>
-        <HiOutlineDeviceMobile />
-      </ButtonMobile>
-      <NavList>
+      <NavList $isOpen={isOpen}>
         <li>
           <StyledLink to="dashboard">
             <HiOutlineHome />

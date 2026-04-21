@@ -3,8 +3,15 @@ import LightLogo from "@/assets/logo-light.png";
 import DarkLogo from "@/assets/logo-dark.png";
 import { useDarkMode } from "@/contexts/DarkModeContext";
 
-const StyledLogo = styled.div`
+const StyledLogo = styled.div.attrs<{ $isOpen?: boolean }>((props) => ({
+  $isOpen: props.$isOpen || false,
+}))`
   text-align: center;
+
+  @media (max-width: 812px) {
+    margin-top: 10rem;
+    visibility: ${(props) => (props.$isOpen ? "visible" : "hidden")};
+  }
 `;
 
 const Img = styled.img`
@@ -12,11 +19,11 @@ const Img = styled.img`
   width: auto;
 `;
 
-function Logo() {
+function Logo({ isOpen }: { isOpen?: boolean }) {
   const { isDarkMode } = useDarkMode();
 
   return (
-    <StyledLogo>
+    <StyledLogo $isOpen={isOpen}>
       <Img src={isDarkMode ? DarkLogo : LightLogo} alt="Logo" />
     </StyledLogo>
   );

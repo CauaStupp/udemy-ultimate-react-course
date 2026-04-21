@@ -24,6 +24,10 @@ const StyledSalesChart = styled(DashboardBox)`
   & .recharts-cartesian-grid-vertical line {
     stroke: ${(props) => props.theme.colors.grey[300]};
   }
+
+  @media (max-width: 1222px) {
+    grid-column: 1 / span 2;
+  }
 `;
 
 type SalesChartProps = {
